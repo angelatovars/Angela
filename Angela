@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+struct TreeNode {
+    int value;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int val) : value(val), left(nullptr), right(nullptr) {}
+};
+
+int findDeepestLeafWeight(TreeNode* root) {
+    if (!root) return 0;
+    return std::max(findDeepestLeafWeight(root->left), findDeepestLeafWeight(root->right)) + root->value;
+}
+
+void quickSort(std::vector<int>& arr) {
+    std::sort(arr.begin(), arr.end());
+}
+
+bool binarySearch(const std::vector<int>& arr, int target) {
+    return std::binary_search(arr.begin(), arr.end(), target);
+}
+
+int main() {
+    TreeNode* root = new TreeNode(1);
+    root->left = new TreeNode(2);
+    root->right = new TreeNode(3);
+    root->left->left = new TreeNode(4);
+    root->left->right = new TreeNode(5);
+
+    int deepestLeafWeight = findDeepestLeafWeight(root);
+    std::cout << "Peso de la hoja más profunda: " << deepestLeafWeight << std::endl;
+
+    std::vector<int> arr = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
+    quickSort(arr);
+
+    int target = 4;
+    bool found = binarySearch(arr, target);
+    std::cout << "Búsqueda binaria: " << (found ? "Encontrado" : "No encontrado") << std::endl;
+
+    return 0;
+}
